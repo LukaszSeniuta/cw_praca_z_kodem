@@ -7,6 +7,5 @@ jobs:
             - run: echo "docker --version"
             - run: echo "python --version"
             - run: echo "pylint app.py"
-            - run: echo docker build --tag test-app ."
-              uses: actions/checkout@v3
-            
+            - run: echo "docker build --tag test-app ."
+            - uses: actions/checkout@v3            
