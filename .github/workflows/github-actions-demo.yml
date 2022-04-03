@@ -4,8 +4,8 @@ jobs:
     Test-github-actions:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "docker --version"
-            - run: echo "python --version"
-            - run: echo "pylint app.py"
-            - run: echo "docker build --tag test-app ."
+            - run: docker --version
+            - run: python --version
+            - run: pylint app.py
+            - run: docker build --tag test-app .
             - uses: actions/checkout@v3            
