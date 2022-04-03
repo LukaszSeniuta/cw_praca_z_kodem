@@ -1,0 +1,12 @@
+name: My first Github Workflow
+on: [push]
+jobs:
+    Test-github-actions:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "docker --version"
+            - run: echo "python --version"
+            - run: echo "pylint app.py"
+            - run: echo docker build --tag test-app ."
+              uses: actions/checkout@v3
+            
