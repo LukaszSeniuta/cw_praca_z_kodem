@@ -7,5 +7,5 @@ jobs:
             - run: docker --version
             - run: python --version
             - run: pylint app.py
-            - run: docker build --tag test-app .
+            - run: docker build --tag testing-app .
             - uses: actions/checkout@v3            
