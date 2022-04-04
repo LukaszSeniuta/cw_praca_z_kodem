@@ -1,12 +1,34 @@
 name: My first Github Workflow
 on: [push]
 jobs:
-    Test-github-actions:
-        runs-on: ubuntu-latest
-        steps:
-            - run: docker --version
-            - run: python --version
-            - run: python -m pip install pylint
-            - run: pylint app.py
-            - run: docker build --tag testing-app .
-            - uses: actions/checkout@v3            
+  Check-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Installing Docker"
+      - run: |
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+          sudo apt-get update
+          sudo apt-get install docker-ce
+      - run: docker --version
+      - run: python --version
+      - uses: actions/checkout@v3
+
+  Check-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Installing Pylint"
+      - run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+      - run: find . -name '*.py' -exec pylint {} \;
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+  Build-app-image:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building app image"
+      - run: find . -name "Dockerfile" -exec docker build --tag test-flask-app . {} \;
+      - name: Check out repository code
+        uses: actions/checkout@v3
