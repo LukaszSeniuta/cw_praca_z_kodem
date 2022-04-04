@@ -6,6 +6,7 @@ jobs:
         steps:
             - run: docker --version
             - run: python --version
+            - run: python -m pip install pylint
             - run: pylint app.py
             - run: docker build --tag testing-app .
             - uses: actions/checkout@v3            
